@@ -7,7 +7,7 @@ import warnings
 from sklearn.preprocessing import KBinsDiscretizer
 from sklearn.preprocessing import FunctionTransformer, PowerTransformer
 from sklearn.preprocessing import StandardScaler
-
+from sklearn.ensemble import RandomForestRegressor
 warnings.filterwarnings('ignore')
 
 def detectNonStdFeatures(df):
@@ -27,6 +27,27 @@ selectedFeatures=['MSZoning', 'Neighborhood', 'OverallQual', 'OverallCond',
 
 dfTrain=pd.read_csv("train.csv")
 dfTest=pd.read_csv("test.csv")
+
+dfTrain=dfTrain.drop(columns=['Id',"Alley","Fence","PoolQC",
+                              "MiscFeature","Street","Utilities",
+                              "Condition2","RoofMatl",'Exterior2nd',
+                              "BsmtCond","BsmtFinType2","BsmtFinSF2",
+                              "Heating","Functional","GarageQual",
+                              "GarageCond","LowQualFinSF",'KitchenAbvGr',
+                              'GarageYrBlt','EnclosedPorch','3SsnPorch',
+                              'ScreenPorch','PoolArea','MiscVal',
+                              'FireplaceQu','GarageCars','GrLivArea',
+                              'MasVnrType'])
+dfTest=dfTest.drop(columns=['Id',"Alley","Fence","PoolQC",
+                            "MiscFeature","Street","Utilities",
+                            "Condition2","RoofMatl",'Exterior2nd',
+                            "BsmtCond","BsmtFinType2","BsmtFinSF2",
+                            "Heating","Functional","GarageQual",
+                            "GarageCond","LowQualFinSF",'KitchenAbvGr',
+                            'GarageYrBlt','EnclosedPorch','3SsnPorch',
+                            'ScreenPorch','PoolArea','MiscVal',
+                            'FireplaceQu','GarageCars','GrLivArea',
+                            'MasVnrType'])
 
 Xtrain=dfTrain[selectedFeatures].copy()
 Xtest=dfTest[selectedFeatures].copy()
